@@ -40,4 +40,26 @@ public class Turret : MonoBehaviour {
 			enemysInTrigger.Add (other.gameObject); 
 	}
 
+	public void hit(GameObject bullet)
+	{
+		hp -= bullet.GetComponent<Bullet>().hitValue;
+		if (hp <= 0)
+		{
+			die();
+		}
+	}
+
+	void die()
+	{
+		GameManager.GetComponent<GameManager>().livingEnemies--;
+		int lootCount = Random.Range(0, 5);
+
+		for (int i = 0; i<lootCount; i++)
+		{
+			Instantiate(dropObject, transform.position, Random.rotation);
+		}
+
+		Destroy(gameObject);
+	}
+
 }
