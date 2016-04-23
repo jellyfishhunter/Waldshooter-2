@@ -20,10 +20,13 @@ public class Enemy : MonoBehaviour {
     float timeUntilnextShot = 0;
     float timeUntilStopChasingPlayer = 0;
 
+    GameObject GameManager;
+
 	// Use this for initialization
 	void Start () {
         player = GameObject.FindGameObjectWithTag("Player");
         tree = GameObject.FindGameObjectWithTag("Base Tree");
+        GameManager = GameObject.Find("Game Manager");
         agent = GetComponent<NavMeshAgent>();
         behaviourState = States.attackTree;
         targetTransform = tree.transform;
@@ -179,6 +182,7 @@ public class Enemy : MonoBehaviour {
     // TODO: enemy counter etc
     void die()
     {
+        GameManager.GetComponent<GameManager>().livingEnemies--;
         int lootCount = Random.Range(0, 5);
 
         for (int i = 0; i<lootCount; i++)
