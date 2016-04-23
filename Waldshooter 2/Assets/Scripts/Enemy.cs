@@ -40,7 +40,6 @@ public class Enemy : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         checkBehaviour();
-        //targetTransform = chooseTarget();
         aimAndShoot();
     }
 
@@ -73,14 +72,45 @@ public class Enemy : MonoBehaviour {
                 }
 
                 break;
+
             case States.chasePlayer:
-
+                if (inRangeOf(player))
+                {
+                    targetTransform = player.transform;
+                    behaviourState = States.attackPlayer;
+                    moveToTarget();
+                    return;
+                }
+                else if(timeUntilStopChasingPlayer<=0)
+                {
+                    targetTransform = tree.transform;
+                    behaviourState = States.attackTree;
+                    moveToTarget();
+                    return;
+                }
+                timeUntilStopChasingPlayer -= Time.deltaTime;
                 break;
+
             case States.attackPlayer:
+                if (!inRangeOf(player))
+                {
+                    targetTransform = player.transform;
+                    behaviourState = States.chasePlayer;
+                    moveToTarget();
 
+                    timeUntilStopChasingPlayer = Random.Range(1f, 5f);
+                    return;
+                }
                 break;
-            case States.attackObstacle:
 
+            case States.attackObstacle: // läuft hier weiter richtung baum
+                if (inRangeOf(tree) || targetTransform == null)
+                {
+                    targetTransform = tree.transform;
+                    behaviourState = States.attackTree;
+                    moveToTarget();
+                    return;
+                }
                 break;
         }
     }
