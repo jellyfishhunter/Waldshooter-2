@@ -45,6 +45,23 @@ public class Bullet : MonoBehaviour {
             target.GetComponent<Enemy>().hit(gameObject);
             Destroy(gameObject);
         }
+        else if (!isPlayerBullet && (target.tag == "Building"))
+        {
+            if(target.GetComponent<Wall>() != null)
+            {
+                target.GetComponent<Wall>().hit(gameObject);
+            }
+            else if (target.GetComponent<Turret>() != null)
+            {
+                target.GetComponent<Turret>().hit(gameObject);
+            }
+
+            Destroy(gameObject);
+        }
+        else if (target.tag == "Obstacle")
+        {
+            Destroy(gameObject);
+        }
     }
 
     // nicht nötig

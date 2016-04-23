@@ -3,14 +3,14 @@ using System.Collections;
 
 public class Wall : MonoBehaviour {
     int level = 1;
-    int currentHealth;
-    public int maxHealth = 200;
+    int hp;
+    public int maxHp = 200;
     public int cost = 10;
     public int upgradeCosts = 15;
 
 	// Use this for initialization
 	void Start () {
-        currentHealth = maxHealth;
+        hp = maxHp;
 	}
 	
 	// Update is called once per frame
@@ -30,8 +30,8 @@ public class Wall : MonoBehaviour {
 
     public void hit(GameObject bullet)
     {
-        currentHealth -= bullet.GetComponent<Bullet>().hitValue;
-        if (currentHealth <= 0)
+        hp -= bullet.GetComponent<Bullet>().hitValue;
+        if (hp <= 0)
         {
             // destroy
         }
