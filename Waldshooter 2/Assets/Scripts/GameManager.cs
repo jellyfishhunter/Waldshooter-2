@@ -5,12 +5,14 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour {
 
-	private enum States{gameover, fightloop, buildloop, start};
+    //public static List<Transform> spawnedEnemies = new List<Transform>();
+
+    private enum States{gameover, fightloop, buildloop, start};
 	private States myState;
 
 	[Header("Loop Timers")]
 	public float fightLoopTime = 5.0f; 
-	public float buildLooptime = 5.0f; 
+	public float buildLooptime = 100.0f; 
 
 	[Header("Enemy related Stuff (Lists)")]
 	public List<Transform> enemySpawnPoints; 
@@ -22,43 +24,57 @@ public class GameManager : MonoBehaviour {
 
 	bool isSpawningEnemys = false; 
 	bool loopTimerActive = false; 
-	int waveSize = 0; 
+	int waveSize = 10;
+    public int livingEnemies;
+    int spawnedEnemies = 0;
 
 	void Start () {
-		myState = States.fightloop; 
+		myState = States.buildloop;
+        SetAudio(myState);
 	}
 	
 	void Update () {
-		
+
+        //Debug.Log(myState);
+
 		//GAMESTART
 		if (myState == States.start) {
 			Debug.Log ("Game started"); 
-			myState = States.fightloop; 
-		}
+			myState = States.fightloop;
+        }
 
 		//BUILDLOOP
 		if (myState == States.buildloop) {
-			waveSize = 0; 
+          //  Debug.Log("bin in buildloop");
+            //waveSize = 0;
+            spawnedEnemies = 0;
 			Cursor.visible = true;
 
 			if (!loopTimerActive) {
 				StartCoroutine (LoopTimer (buildLooptime, myState, States.fightloop)); 
-				loopTimerActive = true; 
-			}		
-		}
+				loopTimerActive = true;
+            }
+        }
 
 		//FIGHTLOOP
 		if (myState == States.fightloop) {
 			Cursor.visible = false;
 
-			if(!isSpawningEnemys) {
-				StartCoroutine(SpawnEnemys (enemys[0], enemySpawnPoints[0], 0.01f)); 
-				isSpawningEnemys = true; 
-				waveSize++; 
+
+			if(!isSpawningEnemys && spawnedEnemies < waveSize) {
+				StartCoroutine(SpawnEnemys (enemys[0], enemySpawnPoints[0], 0.01f));
+                //Debug.Log("livingEnemies: " + livingEnemies.ToString());
+                isSpawningEnemys = true; 
+				//waveSize++; 
 			}
 
-			if (waveSize >= 10) {
-				myState = States.buildloop; 
+			//if (waveSize >= 10) {
+            if(livingEnemies == 0 && spawnedEnemies == waveSize) {
+                //Debug.Log("spawnedEnemies = " + spawnedEnemies.ToString());
+                //Debug.Log("waveSize = " + waveSize.ToString());
+				myState = States.buildloop;
+                Debug.Log("wechsle zu buildloop");
+                SetAudio(myState);
 			}
 		}
 
@@ -69,8 +85,13 @@ public class GameManager : MonoBehaviour {
 	}
 		
 	IEnumerator SpawnEnemys(GameObject enemy, Transform spawnPosition, float waitTime){
-		GameObject myEnemy = (GameObject)Instantiate (enemy, spawnPosition.position, Quaternion.identity); 
-		Debug.Log ("Enemy spawned, wave: "+waveSize); 
+		GameObject myEnemy = (GameObject)Instantiate (enemy, spawnPosition.position, Quaternion.identity);
+        livingEnemies++;
+        spawnedEnemies++;
+
+        //Debug.Log("livingEnemies: " + livingEnemies.ToString());
+
+        Debug.Log ("Enemy spawned, wave: "+waveSize); 
 		yield return new WaitForSeconds (0.5f); 
 		isSpawningEnemys = false;
 	}
@@ -78,7 +99,9 @@ public class GameManager : MonoBehaviour {
 	IEnumerator LoopTimer(float myTime, States initState, States nextState){
 		yield return new WaitForSeconds (myTime); 
 		if (initState == myState) {
-			myState = nextState; 
+			myState = nextState;
+            SetAudio(myState);
+            Debug.Log("wechsle zu " + myState);
 		}
 		Debug.Log ("Next State: " + nextState); 
 		loopTimerActive = false; 
@@ -95,4 +118,28 @@ public class GameManager : MonoBehaviour {
 		myState = States.gameover; 
 		Debug.Log ("Gameover"); 
 	}
+
+    private void SetAudio(States myState)
+    {
+        switch (myState)
+        {
+            case States.start:
+                Debug.Log("trying to play start music");
+                break;
+            case States.fightloop:
+                Debug.Log("trying to play fightloopaudio");
+                this.GetComponent<AudioSource>().clip = fightLoopAudio;
+                this.GetComponent<AudioSource>().Play();
+                break;
+            case States.buildloop:
+                Debug.Log("trying to play buildloopaudio");
+                this.GetComponent<AudioSource>().clip = buildLoopAudio;
+                this.GetComponent<AudioSource>().Play();
+                break;
+            default:
+                Debug.Log("Default case");
+                break;
+        }
+
+    }
 }
