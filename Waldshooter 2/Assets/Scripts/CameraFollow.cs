@@ -6,7 +6,9 @@ public class CameraFollow : MonoBehaviour
 
     private GameObject player;
     private float zDistance;
-    private float targetSize = 10f;
+	public float targetSize = 10f;
+	public float runningSize = 10f;
+	public float shootingSize = 6f; 
 
     // Use this for initialization
     void Start()
@@ -33,12 +35,12 @@ public class CameraFollow : MonoBehaviour
 
     void MoveOut()
     {
-        targetSize = 10f;
+		targetSize = shootingSize; 
 
     }
 
     void MoveIn()
     {
-        targetSize = 6f;
+		targetSize = runningSize;
     }
 }

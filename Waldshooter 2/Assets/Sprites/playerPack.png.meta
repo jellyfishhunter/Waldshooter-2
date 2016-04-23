@@ -1,0 +1,373 @@
+fileFormatVersion: 2
+guid: 0988f49187f3a45078fda5a09e64cbd3
+timeCreated: 1461420456
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: playerPack_0
+    21300002: playerPack_1
+    21300004: playerPack_2
+    21300006: playerPack_3
+    21300008: playerPack_4
+    21300010: playerPack_5
+    21300012: playerPack_6
+    21300014: playerPack_7
+    21300016: playerPack_8
+    21300018: playerPack_9
+    21300020: playerPack_10
+    21300022: playerPack_11
+    21300024: playerPack_12
+    21300026: playerPack_13
+    21300028: playerPack_14
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 7
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  allowsAlphaSplitting: 0
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: playerPack_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 896
+        width: 128
+        height: 128
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -12, y: 120}
+        - {x: -53, y: 109}
+        - {x: -54, y: 105}
+        - {x: -54, y: 41}
+        - {x: -29, y: 12}
+        - {x: 24, y: 12}
+        - {x: 24, y: 117}
+        - {x: 16, y: 120}
+    - name: playerPack_1
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 896
+        width: 128
+        height: 128
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -6, y: 120}
+        - {x: -41, y: 104}
+        - {x: -41, y: 51}
+        - {x: -27, y: 14}
+        - {x: 26, y: 14}
+        - {x: 37, y: 49}
+        - {x: 37, y: 109}
+        - {x: 17, y: 120}
+    - name: playerPack_2
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 896
+        width: 128
+        height: 128
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -23, y: 128}
+        - {x: -25, y: 117}
+        - {x: -25, y: 35}
+        - {x: -8, y: 15}
+        - {x: 34, y: 15}
+        - {x: 45, y: 30}
+        - {x: 45, y: 94}
+        - {x: 27, y: 128}
+    - name: playerPack_3
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 896
+        width: 128
+        height: 128
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 22, y: 106}
+        - {x: 7, y: 126}
+        - {x: -19, y: 126}
+        - {x: -37, y: 118}
+        - {x: -37, y: 57}
+        - {x: -18, y: 17}
+        - {x: -7, y: 15}
+        - {x: 20, y: 15}
+        - {x: 25, y: 22}
+        - {x: 33, y: 40}
+        - {x: 33, y: 75}
+    - name: playerPack_4
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 896
+        width: 128
+        height: 128
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 4, y: 117}
+        - {x: -19, y: 117}
+        - {x: -31, y: 110}
+        - {x: -31, y: 42}
+        - {x: -25, y: 23}
+        - {x: 12, y: 23}
+        - {x: 31, y: 56}
+        - {x: 31, y: 91}
+        - {x: 30, y: 94}
+    - name: playerPack_5
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 896
+        width: 128
+        height: 128
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 7, y: 118}
+        - {x: -10, y: 118}
+        - {x: -31, y: 100}
+        - {x: -31, y: 60}
+        - {x: -13, y: 15}
+        - {x: 8, y: 15}
+        - {x: 23, y: 22}
+        - {x: 27, y: 55}
+        - {x: 27, y: 94}
+    - name: playerPack_6
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 768
+        width: 128
+        height: 128
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 4, y: 107}
+        - {x: -19, y: 107}
+        - {x: -59, y: 53}
+        - {x: -60, y: 51}
+        - {x: -60, y: 25}
+        - {x: -56, y: 24}
+        - {x: 42, y: 24}
+        - {x: 43, y: 26}
+        - {x: 43, y: 56}
+        - {x: 10, y: 105}
+    - name: playerPack_7
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 768
+        width: 128
+        height: 128
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -24, y: 117}
+        - {x: -55, y: 107}
+        - {x: -55, y: 32}
+        - {x: -33, y: 14}
+        - {x: -10, y: 10}
+        - {x: 43, y: 10}
+        - {x: 56, y: 22}
+        - {x: 56, y: 113}
+        - {x: 55, y: 117}
+    - name: playerPack_8
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 768
+        width: 128
+        height: 128
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -9, y: 89}
+        - {x: -18, y: 78}
+        - {x: -18, y: 45}
+        - {x: -11, y: 43}
+        - {x: 18, y: 43}
+        - {x: 20, y: 49}
+        - {x: 20, y: 80}
+        - {x: 9, y: 89}
+    - name: playerPack_9
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 640
+        width: 128
+        height: 128
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -29, y: 121}
+        - {x: -53, y: 110}
+        - {x: -54, y: 105}
+        - {x: -54, y: 47}
+        - {x: -33, y: 16}
+        - {x: -16, y: 13}
+        - {x: 24, y: 13}
+        - {x: 24, y: 107}
+        - {x: 17, y: 121}
+    - name: playerPack_10
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 640
+        width: 128
+        height: 128
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -4, y: 121}
+        - {x: -19, y: 113}
+        - {x: -41, y: 97}
+        - {x: -41, y: 59}
+        - {x: -18, y: 20}
+        - {x: 2, y: 15}
+        - {x: 25, y: 15}
+        - {x: 37, y: 46}
+        - {x: 37, y: 110}
+        - {x: 17, y: 121}
+    - name: playerPack_11
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 640
+        width: 128
+        height: 128
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -25, y: 49}
+        - {x: -19, y: 16}
+        - {x: 25, y: 16}
+        - {x: 45, y: 28}
+        - {x: 45, y: 82}
+        - {x: 41, y: 107}
+        - {x: 23, y: 128}
+        - {x: -15, y: 128}
+        - {x: -25, y: 125}
+    - name: playerPack_12
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 640
+        width: 128
+        height: 128
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 22, y: 107}
+        - {x: 7, y: 127}
+        - {x: -25, y: 127}
+        - {x: -37, y: 123}
+        - {x: -37, y: 55}
+        - {x: -24, y: 16}
+        - {x: 20, y: 16}
+        - {x: 25, y: 23}
+        - {x: 33, y: 41}
+        - {x: 33, y: 76}
+    - name: playerPack_13
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 640
+        width: 128
+        height: 128
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 4, y: 118}
+        - {x: -19, y: 118}
+        - {x: -31, y: 111}
+        - {x: -31, y: 43}
+        - {x: -25, y: 24}
+        - {x: 12, y: 24}
+        - {x: 31, y: 57}
+        - {x: 31, y: 92}
+        - {x: 30, y: 95}
+    - name: playerPack_14
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 640
+        width: 128
+        height: 128
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 7, y: 119}
+        - {x: -10, y: 119}
+        - {x: -31, y: 101}
+        - {x: -31, y: 38}
+        - {x: -13, y: 16}
+        - {x: 18, y: 16}
+        - {x: 23, y: 23}
+        - {x: 27, y: 56}
+        - {x: 27, y: 95}
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
