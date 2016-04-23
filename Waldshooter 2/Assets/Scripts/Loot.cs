@@ -23,9 +23,9 @@ public class Loot : MonoBehaviour
         timeToLive -= Time.deltaTime;
     }
 
-    void OnTriggerEnter(Collider other)
+	void OnCollisionEnter(Collision collision) 
     {
-        GameObject target = other.gameObject;
+			GameObject target = collision.gameObject;
         if (target.tag == "Player")
         {
             target.GetComponent<Player>().collectLoot(this);
