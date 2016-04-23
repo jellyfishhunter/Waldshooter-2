@@ -25,13 +25,11 @@ public class Player : MonoBehaviour
     public float distance = 10.0f;
 
     public Transform bulletSpawn;
-    public Transform gunTrail;
 
     void Start()
     {
         myState = States.running;
         PlayerRigidbody = this.GetComponent<Rigidbody>();
-        gunTrail.gameObject.SetActive(false);
     }
 
     void LookAtMouse()
@@ -80,7 +78,6 @@ public class Player : MonoBehaviour
         if (myState == States.running)
         {
             speed = RunSpeed;
-            gunTrail.gameObject.SetActive(false);
             ViewToDirection();
             Camera.main.gameObject.SendMessage("MoveIn");
         }
@@ -89,7 +86,6 @@ public class Player : MonoBehaviour
         {
             speed = ShootingSpeed;
             Shoot();
-            gunTrail.gameObject.SetActive(true);
             Camera.main.gameObject.SendMessage("MoveOut");
         }
         Move();

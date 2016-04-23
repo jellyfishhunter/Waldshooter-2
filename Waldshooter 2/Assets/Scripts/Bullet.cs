@@ -32,7 +32,7 @@ public class Bullet : MonoBehaviour {
         GameObject target = other.gameObject;
         if (!isPlayerBullet && (target.tag == "Base Tree"))
         {
-            target.GetComponent<BaseTree>().hit(gameObject);
+			target.GetComponent<BaseTree>().hit(gameObject);
             Destroy(gameObject);
         }
         else if (!isPlayerBullet && (target.tag == "Player"))
