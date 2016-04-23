@@ -22,13 +22,13 @@ public class Bomb : MonoBehaviour {
 
 
 
-	void OnCollisionEnter(Collision col)
+	/*void OnCollisionEnter(Collision col)
     {
 		ContactPoint contact = col.contacts[0];
 		GameObject explosion = (GameObject)Instantiate (particleSystem, contact.point, Quaternion.identity);
 		Destroy (explosion, 1); 
 		Destroy (this.gameObject); 
-    }
+    }*/
 
 	void OnTriggerEnter(Collider other){
 		GameObject target = other.gameObject; 

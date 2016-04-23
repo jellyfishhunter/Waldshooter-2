@@ -32,8 +32,8 @@ public class Turret : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		myTransform = transform;
-        StartCoroutine(SimulateProjectile());
-
+        //StartCoroutine(SimulateProjectile());
+        shoot();
     }
 
     // Update is called once per frame
@@ -60,11 +60,19 @@ public class Turret : MonoBehaviour {
 
     void shoot()
     {
+        GameObject projectile = Instantiate(Projectile, myTransform.position, Quaternion.identity) as GameObject;
+        projectile.transform.LookAt(Target);
+        projectile.transform.Rotate(new Vector3(45, 0, 0));
+        float distance = Vector3.Distance(myTransform.position, Target.position);
 
+        float velocity = Mathf.Sqrt(gravity * distance * distance / (myTransform.position.y + distance - Target.transform.position.y) / 2 * Mathf.Cos(firingAngle) * Mathf.Cos(firingAngle));
+
+        Rigidbody rb = projectile.GetComponent<Rigidbody>();
+        rb.velocity = transform.forward * velocity;
     }
-		
 
-	IEnumerator SimulateProjectile()
+
+    IEnumerator SimulateProjectile()
 	{
 		// Short delay added before Projectile is thrown
 		yield return new WaitForSeconds(1.5f);
