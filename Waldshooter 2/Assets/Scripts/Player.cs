@@ -16,6 +16,7 @@ public class Player : MonoBehaviour
 
     public int Health;
     public int Money;
+
     Rigidbody PlayerRigidbody;
 
     public float fireRate;
@@ -59,12 +60,9 @@ public class Player : MonoBehaviour
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 20 * Time.deltaTime);
         }
     }
-
-
-
+		
     void FixedUpdate()
     {
-
         if (Input.GetButton("Fire2"))
         {
             myState = States.shooting;
@@ -74,7 +72,7 @@ public class Player : MonoBehaviour
             myState = States.running;
         }
 
-
+		// RUNNING STATE
         if (myState == States.running)
         {
             speed = RunSpeed;
@@ -82,6 +80,7 @@ public class Player : MonoBehaviour
             Camera.main.gameObject.SendMessage("MoveIn");
         }
 
+		// SHOOTING STATE 
         if (myState == States.shooting)
         {
             speed = ShootingSpeed;
@@ -97,9 +96,7 @@ public class Player : MonoBehaviour
         PlayerRigidbody.position += move * speed * Time.deltaTime;
         //Debug.Log("Horizontal: " + Input.GetAxis("Horizontal").ToString());
         //Debug.Log("Vertical: " + Input.GetAxis("Vertical").ToString());
-
         //transform.rotation = Quaternion.LookRotation(move);
-
     }
 
     void ViewToDirection()
@@ -118,27 +115,10 @@ public class Player : MonoBehaviour
         {
             Debug.Log("Shoot-Funktion");
             nextFire = Time.time + fireRate;
-
-            /*
-            var position = new Vector3(Input.mousePosition.x, Input.mousePosition.y, distance);
-            position = Camera.main.ScreenToWorldPoint(position);
-<<<<<<< Updated upstream
-            
-			var go = Instantiate(prefab, transform.position, transform.rotation) as GameObject;
-           // go.transform.LookAt(position);
-=======
-
-			var go = Instantiate(prefab, transform.position, transform.rotation) as GameObject;
-           // go.transform.LookAt(position);
-
->>>>>>> Stashed changes
-            */
-
+		
             var go = Instantiate(PlayerBullet, bulletSpawn.position, bulletSpawn.rotation) as GameObject;
             //go.transform.LookAt(position);
-            Debug.Log(position);
             //go.GetComponent<Rigidbody>().AddForce(go.transform.forward * 1000);
-
         }
     }
 
