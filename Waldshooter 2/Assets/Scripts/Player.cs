@@ -5,7 +5,12 @@ using System.Collections;
 public class Player : MonoBehaviour
 {
 
-    public float Speed = 4f;
+    private enum States { running, shooting };
+    private States myState;
+
+    public float RunSpeed = 10f;
+    public float ShootingSpeed = 4f;
+    private float speed;
     private float move = 0f;
     public float tilt;
 
@@ -20,61 +25,92 @@ public class Player : MonoBehaviour
     public float distance = 10.0f;
 
     public Transform bulletSpawn;
+    public Transform gunTrail;
 
     void Start()
     {
+        myState = States.running;
         PlayerRigidbody = this.GetComponent<Rigidbody>();
+        gunTrail.gameObject.SetActive(false);
     }
 
-	void LookAtMouse () 
-	{
-		// Generate a plane that intersects the transform's position with an upwards normal.
-		Plane playerPlane = new Plane(Vector3.up, transform.position);
+    void LookAtMouse()
+    {
+        // Generate a plane that intersects the transform's position with an upwards normal.
+        Plane playerPlane = new Plane(Vector3.up, transform.position);
 
-		// Generate a ray from the cursor position
-		Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
+        // Generate a ray from the cursor position
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-		// Determine the point where the cursor ray intersects the plane.
-		// This will be the point that the object must look towards to be looking at the mouse.
-		// Raycasting to a Plane object only gives us a distance, so we'll have to take the distance,
-		//   then find the point along that ray that meets that distance.  This will be the point
-		//   to look at.
-		float hitdist = 0.0f;
-		// If the ray is parallel to the plane, Raycast will return false.
-		if (playerPlane.Raycast (ray, out hitdist)) 
-		{
-			// Get the point along the ray that hits the calculated distance.
-			Vector3 targetPoint = ray.GetPoint(hitdist);
+        // Determine the point where the cursor ray intersects the plane.
+        // This will be the point that the object must look towards to be looking at the mouse.
+        // Raycasting to a Plane object only gives us a distance, so we'll have to take the distance,
+        //   then find the point along that ray that meets that distance.  This will be the point
+        //   to look at.
+        float hitdist = 0.0f;
+        // If the ray is parallel to the plane, Raycast will return false.
+        if (playerPlane.Raycast(ray, out hitdist))
+        {
+            // Get the point along the ray that hits the calculated distance.
+            Vector3 targetPoint = ray.GetPoint(hitdist);
 
-			// Determine the target rotation.  This is the rotation if the transform looks at the target point.
-			Quaternion targetRotation = Quaternion.LookRotation(targetPoint - transform.position);
+            // Determine the target rotation.  This is the rotation if the transform looks at the target point.
+            Quaternion targetRotation = Quaternion.LookRotation(targetPoint - transform.position);
 
-			// Smoothly rotate towards the target point.
-			transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 20* Time.deltaTime);
-		}
-	}
+            // Smoothly rotate towards the target point.
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 20 * Time.deltaTime);
+        }
+    }
 
 
 
     void FixedUpdate()
     {
-        Move();
+
         if (Input.GetButton("Fire2"))
+        {
+            myState = States.shooting;
+        }
+        else
+        {
+            myState = States.running;
+        }
+
+
+        if (myState == States.running)
+        {
+            speed = RunSpeed;
+            gunTrail.gameObject.SetActive(false);
+            ViewToDirection();
+            Camera.main.gameObject.SendMessage("MoveIn");
+        }
+
+        if (myState == States.shooting)
+        {
+            speed = ShootingSpeed;
             Shoot();
-		//LookAtMouse (); 
-		 
+            gunTrail.gameObject.SetActive(true);
+            Camera.main.gameObject.SendMessage("MoveOut");
+        }
+        Move();
     }
 
     void Move()
     {
         var move = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-        PlayerRigidbody.position += move * Speed * Time.deltaTime;
+        PlayerRigidbody.position += move * speed * Time.deltaTime;
         //Debug.Log("Horizontal: " + Input.GetAxis("Horizontal").ToString());
         //Debug.Log("Vertical: " + Input.GetAxis("Vertical").ToString());
 
         //transform.rotation = Quaternion.LookRotation(move);
 
+    }
+
+    void ViewToDirection()
+    {
+        var move = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
         face(PlayerRigidbody.position + move);
+
     }
 
     void Shoot()
