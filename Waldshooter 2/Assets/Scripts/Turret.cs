@@ -22,46 +22,75 @@ public class Turret : MonoBehaviour {
 	private States myState; 
 
 
+	public Transform Target;
+	public float firingAngle = 45.0f;
+	public float gravity = 9.8f;
+
+	public Transform Projectile;      
+	private Transform myTransform;
+
 	// Use this for initialization
 	void Start () {
-		
+		myTransform = transform; 	
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if (myState == States.attackEnemy) {
-			if(targetTransform != null)
-			face (targetTransform.position); 
-		}
-		if (myState == States.onHold) {
-			face (targetTransform.position); 
-		}
+
 	}
 
 	void OnTriggerEnter(Collider other) {
 		if (other.gameObject.tag == "Enemy") {
-			enemysInTrigger.Add (other.transform); 
+			Target = other.gameObject.transform; 
+			StartCoroutine(SimulateProjectile()); 
 		}
+
 			
 	}
 
 	void OnTriggerExit(Collider other) {
 		if (other.gameObject.tag == "Enemy") {
-			enemysInTrigger.Remove (other.transform); 
 		}
 
 	}
 		
 
-	public void face(Vector3 t)
+	IEnumerator SimulateProjectile()
 	{
-		Vector3 direction = (new Vector3(t.x, transform.position.y, t.z) - transform.position).normalized;
-		if (direction != Vector3.zero)
+		// Short delay added before Projectile is thrown
+		yield return new WaitForSeconds(1.5f);
+		Transform projectile = (Transform)Instantiate (Projectile, myTransform.position, Quaternion.identity);
+
+		// Move projectile to the position of throwing object + add some offset if needed.
+		projectile.position = myTransform.position + new Vector3(0, 2.0f, 0);
+
+		// Calculate distance to target
+		float target_Distance = Vector3.Distance(projectile.position, Target.position);
+
+		// Calculate the velocity needed to throw the object to the target at specified angle.
+		float projectile_Velocity = target_Distance / (Mathf.Sin(2 * firingAngle * Mathf.Deg2Rad) / gravity);
+
+		// Extract the X  Y componenent of the velocity
+		float Vx = Mathf.Sqrt(projectile_Velocity) * Mathf.Cos(firingAngle * Mathf.Deg2Rad);
+		float Vy = Mathf.Sqrt(projectile_Velocity) * Mathf.Sin(firingAngle * Mathf.Deg2Rad);
+
+		// Calculate flight time.
+		float flightDuration = target_Distance / Vx;
+
+		// Rotate projectile to face the target.
+		projectile.rotation = Quaternion.LookRotation(Target.position - projectile.position);
+
+		float elapse_time = 0;
+
+		while (elapse_time < flightDuration)
 		{
-			Quaternion lookRotation = Quaternion.LookRotation(direction);
-			transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 10f);
+			projectile.Translate(0, (Vy - (gravity * elapse_time)) * Time.deltaTime, Vx * Time.deltaTime);
+
+			elapse_time += Time.deltaTime;
+
+			yield return null;
 		}
-	}
+	} 
 
 	public void hit(GameObject bullet)
 	{
