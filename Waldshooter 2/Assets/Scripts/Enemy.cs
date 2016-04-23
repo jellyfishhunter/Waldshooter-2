@@ -74,11 +74,12 @@ public class Enemy : MonoBehaviour {
                 break;
 
             case States.chasePlayer:
+                moveToTarget();
+
                 if (inRangeOf(player))
                 {
                     targetTransform = player.transform;
                     behaviourState = States.attackPlayer;
-                    moveToTarget();
                     return;
                 }
                 else if(timeUntilStopChasingPlayer<=0)
