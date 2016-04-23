@@ -51,14 +51,6 @@ public class Turret : MonoBehaviour {
 
 	void die()
 	{
-		GameManager.GetComponent<GameManager>().livingEnemies--;
-		int lootCount = Random.Range(0, 5);
-
-		for (int i = 0; i<lootCount; i++)
-		{
-			Instantiate(dropObject, transform.position, Random.rotation);
-		}
-
 		Destroy(gameObject);
 	}
 
