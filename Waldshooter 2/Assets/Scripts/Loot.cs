@@ -4,6 +4,7 @@ using System.Collections;
 public class Loot : MonoBehaviour
 {
 
+	public GameObject coinCollectSystem; 
     public int value = 1;
     public float timeToLive = 10;
 
@@ -23,12 +24,14 @@ public class Loot : MonoBehaviour
         timeToLive -= Time.deltaTime;
     }
 
-	void OnCollisionEnter(Collision collision) 
+	void OnTriggerEnter(Collider collision) 
     {
 			GameObject target = collision.gameObject;
         if (target.tag == "Player")
         {
             target.GetComponent<Player>().collectLoot(this);
+			GameObject myGameCollectSystem = (GameObject)Instantiate (coinCollectSystem, this.transform.position, Quaternion.identity); 
+			Destroy (myGameCollectSystem, 1); 
             Destroy(gameObject);
         }
     }

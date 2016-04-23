@@ -104,6 +104,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49f38db8d3adad1459e283f5e6ea110c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  coinCollectSystem: {fileID: 181254, guid: 684cb8b1ec68e4ac4996836f8bba5105, type: 2}
   value: 1
   timeToLive: 10
 --- !u!135 &13551666
