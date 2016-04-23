@@ -31,16 +31,20 @@ public class Turret : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		myTransform = transform; 	
-	}
-	
-	// Update is called once per frame
-	void Update () {
+		myTransform = transform;
+        StartCoroutine(SimulateProjectile());
 
-	}
+    }
 
-	void OnTriggerEnter(Collider other) {
+    // Update is called once per frame
+    void Update () {
+        Debug.DrawRay(Target.transform.position, Vector3.up);
+
+    }
+
+    void OnTriggerEnter(Collider other) {
 		if (other.gameObject.tag == "Enemy") {
+            Debug.Log("Enemy detected");
 			Target = other.gameObject.transform; 
 			StartCoroutine(SimulateProjectile()); 
 		}
@@ -53,6 +57,11 @@ public class Turret : MonoBehaviour {
 		}
 
 	}
+
+    void shoot()
+    {
+
+    }
 		
 
 	IEnumerator SimulateProjectile()
