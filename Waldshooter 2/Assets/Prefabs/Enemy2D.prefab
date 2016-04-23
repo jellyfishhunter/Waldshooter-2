@@ -124,7 +124,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0a75551b1a0b46b6bc108cd4159599c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 5
+  hp: 10
   range: 10
   dropObject: {fileID: 112820, guid: 68aa54549a268c94699e6eb159d21904, type: 2}
   bullet: {fileID: 174168, guid: 598c5f8b6c06147f7a638342f7195956, type: 2}
