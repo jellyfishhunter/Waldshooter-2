@@ -29,6 +29,7 @@ public class Player : MonoBehaviour
 
     void Start()
     {
+
         myState = States.running;
         PlayerRigidbody = this.GetComponent<Rigidbody>();
     }
