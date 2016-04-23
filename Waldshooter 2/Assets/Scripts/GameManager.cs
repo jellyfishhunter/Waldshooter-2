@@ -58,7 +58,7 @@ public class GameManager : MonoBehaviour {
 
 		//FIGHTLOOP
 		if (myState == States.fightloop) {
-			Cursor.visible = false;
+			//Cursor.visible = false;
 
 
 			if(!isSpawningEnemys && spawnedEnemies < waveSize) {
