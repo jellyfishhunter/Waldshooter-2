@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic; 
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour {
 
@@ -27,6 +28,8 @@ public class GameManager : MonoBehaviour {
 	int waveSize = 10;
     public int livingEnemies;
     int spawnedEnemies = 0;
+
+    public GameObject GameOverMenu;
 
 	void Start () {
 		myState = States.buildloop;
@@ -80,8 +83,14 @@ public class GameManager : MonoBehaviour {
 
 		//GAMEOVER
 		if (myState == States.gameover) {
-			Debug.Log ("Game Over"); 
-		}
+			//Debug.Log ("Game Over");
+            Time.timeScale = 0;
+            GameOverMenu.SetActive(true);
+            GameObject.Find("Money_Value").GetComponent<Text>().text = GameObject.Find("Player").GetComponent<Player>().Money.ToString();
+            GameObject.Find("Kills_Value").GetComponent<Text>().text = GameObject.Find("Player").GetComponent<Player>().Kills.ToString();
+            Cursor.visible = true;
+            this.GetComponent<AudioSource>().Stop();
+        }
 	}
 		
 	IEnumerator SpawnEnemys(GameObject enemy, Transform spawnPosition, float waitTime){
@@ -142,4 +151,21 @@ public class GameManager : MonoBehaviour {
         }
 
     }
+
+	public void LoadScene(int sceneToLoad){
+		Application.LoadLevel (sceneToLoad);
+	}
+
+	public void ExitGame(){
+		Application.Quit ();
+	}
+
+	void OnLevelWasLoaded(int level)
+	{
+		if (level == 1)
+		{
+			print("Level " + level.ToString() + " loaded");
+			Time.timeScale = 1;
+		}
+	}
 }

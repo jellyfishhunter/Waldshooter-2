@@ -16,6 +16,7 @@ public class Player : MonoBehaviour
 
     public int Health;
     public int Money;
+    public int Kills;
 
     Rigidbody PlayerRigidbody;
 
@@ -140,6 +141,7 @@ public class Player : MonoBehaviour
         {
             Debug.Log("Player Dead");
             //die();
+            GameObject.Find("Game Manager").GetComponent<GameManager>().GameOver();
         }
     }
 

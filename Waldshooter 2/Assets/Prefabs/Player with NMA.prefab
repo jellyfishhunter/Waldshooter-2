@@ -77,7 +77,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 187050}
   m_LocalRotation: {x: 0.000000041052203, y: 0.7071068, z: 0.70710677, w: -0.000000014901161}
-  m_LocalPosition: {x: 0.111, y: -0.472, z: -0.643}
+  m_LocalPosition: {x: 0.111, y: 0, z: -0.643}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 425420}
@@ -89,7 +89,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 108396}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.664, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 425420}
@@ -225,6 +225,7 @@ MonoBehaviour:
   tilt: 0
   Health: 0
   Money: 0
+  Kills: 0
   fireRate: 0.2
   PlayerBullet: {fileID: 174168, guid: 064652c7cd30d4b8a95a243e829aca3f, type: 2}
   distance: 10

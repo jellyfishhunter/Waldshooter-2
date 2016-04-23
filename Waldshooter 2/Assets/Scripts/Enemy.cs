@@ -155,7 +155,7 @@ public class Enemy : MonoBehaviour {
         {
             shoot();
             timeUntilnextShot = attackIntervall;
-           // Debug.Log("shoot");
+            Debug.Log("shoot");
         }
         
         timeUntilnextShot -= Time.deltaTime;
@@ -183,6 +183,7 @@ public class Enemy : MonoBehaviour {
     void die()
     {
         GameManager.GetComponent<GameManager>().livingEnemies--;
+        player.GetComponent<Player>().Kills++;
         int lootCount = Random.Range(0, 5);
 
         for (int i = 0; i<lootCount; i++)
