@@ -155,7 +155,7 @@ public class Enemy : MonoBehaviour {
         {
             shoot();
             timeUntilnextShot = attackIntervall;
-            Debug.Log("shoot");
+           // Debug.Log("shoot");
         }
         
         timeUntilnextShot -= Time.deltaTime;
