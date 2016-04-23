@@ -5,28 +5,25 @@ public class BuildingLot : MonoBehaviour {
 
     GameObject turret;
     GameObject wall;
+    BuildManager bm;
 
     bool GUIOpen = false;
 
     void Start()
     {
-        /*
-         * von GameManager holen
-        turret =  
-        wall = 
-         * 
-         */ 
+        bm = GameObject.Find("Build Manager").GetComponent<BuildManager>();
+        turret = bm.turret;
+        wall = bm.wall;
     }
 
     void OnTriggerStay(Collider other)
     {
-        //Debug.Log("Bauen?");
 
         if (!GUIOpen && Input.GetKey(KeyCode.C))
         {
             GUIOpen = true;
-            Debug.Log("Bauen");
-            // baumenü öffnen
+
+            bm.OpenMenu(this);
         }
     }
 
@@ -34,7 +31,8 @@ public class BuildingLot : MonoBehaviour {
     {
         if (GUIOpen)
         {
-            // baumenü schließen
+            bm.CloseMenu(this);
+
             GUIOpen = false;
         }
     }
@@ -47,5 +45,20 @@ public class BuildingLot : MonoBehaviour {
     public void buildWall()
     {
         Instantiate(wall, transform.position, transform.rotation);
+    }
+
+    public void repair()
+    {
+
+    }
+
+    public void upgrade()
+    {
+
+    }
+
+    public void closeGUI()
+    {
+        GUIOpen = false;
     }
 }
