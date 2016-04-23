@@ -300,6 +300,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf3bf699eeebf4ad4991830ea35f8d99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  targetSize: 10
+  runningSize: 10
+  shootingSize: 6
 --- !u!1 &328147113
 GameObject:
   m_ObjectHideFlags: 0
@@ -660,8 +663,8 @@ GameObject:
   - 33: {fileID: 1711967561}
   - 65: {fileID: 1711967560}
   - 23: {fileID: 1711967559}
-  - 114: {fileID: 1711967563}
   - 208: {fileID: 1711967564}
+  - 114: {fileID: 1711967563}
   m_Layer: 0
   m_Name: Tree
   m_TagString: Base Tree
@@ -811,7 +814,6 @@ MonoBehaviour:
   PlayerBullet: {fileID: 0}
   distance: 10
   bulletSpawn: {fileID: 0}
-  gunTrail: {fileID: 0}
 --- !u!114 &1885494787
 MonoBehaviour:
   m_ObjectHideFlags: 0
