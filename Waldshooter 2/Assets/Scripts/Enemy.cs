@@ -4,6 +4,9 @@ using System.Collections;
 // TODO AI verhalten überdenken
 public class Enemy : MonoBehaviour {
 
+    private enum States { attackTree, chasePlayer, attackPlayer, attackObstacle };
+    private States behaviourState;
+
     public int hp;
     public float range;
     public GameObject dropObject;
@@ -11,34 +14,75 @@ public class Enemy : MonoBehaviour {
     public float attackIntervall;
 
     GameObject player;
+    GameObject tree;
     Transform targetTransform;
     NavMeshAgent agent;
     float timeUntilnextShot = 0;
+    float timeUntilStopChasingPlayer = 0;
 
 	// Use this for initialization
 	void Start () {
         player = GameObject.FindGameObjectWithTag("Player");
-        targetTransform = chooseTarget();
+        tree = GameObject.FindGameObjectWithTag("Base Tree");
+        agent = GetComponent<NavMeshAgent>();
+        behaviourState = States.attackTree;
+        targetTransform = tree.transform;
         moveToTarget();
 	}
 
     void moveToTarget()
     {
-        agent = GetComponent<NavMeshAgent>();
         agent.destination = targetTransform.position;
         agent.stoppingDistance = range;
         agent.Resume();
     }
-
-    public void initialize()
-    {
-
-    }
 	
 	// Update is called once per frame
 	void Update () {
-        targetTransform = chooseTarget();
+        checkBehaviour();
+        //targetTransform = chooseTarget();
         aimAndShoot();
+    }
+
+    void checkBehaviour()
+    {
+        switch (behaviourState)
+        {
+            case States.attackTree:
+                if (inRangeOf(player))
+                {
+                    targetTransform = player.transform;
+                    behaviourState = States.attackPlayer;
+                    moveToTarget();
+                    return;
+                }
+
+                if(!inRangeOf(tree))
+                {
+                    GameObject[] buildings = GameObject.FindGameObjectsWithTag("Building");
+
+                    foreach (GameObject building in buildings)
+                    {
+                        if (inRangeOf(building))
+                        {
+                            targetTransform = building.transform;
+                            behaviourState = States.attackObstacle;
+                            return;
+                        }
+                    }
+                }
+
+                break;
+            case States.chasePlayer:
+
+                break;
+            case States.attackPlayer:
+
+                break;
+            case States.attackObstacle:
+
+                break;
+        }
     }
 
     bool inRangeOf(GameObject other)
