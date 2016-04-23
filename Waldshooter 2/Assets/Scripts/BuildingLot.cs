@@ -2,6 +2,7 @@
 using System.Collections;
 
 public class BuildingLot : MonoBehaviour {
+    public GameObject building = null;
 
     GameObject turret;
     GameObject wall;
@@ -11,6 +12,11 @@ public class BuildingLot : MonoBehaviour {
 
     void Start()
     {
+        if(building != null)
+        {
+            building.transform.position = transform.position;
+            building.transform.rotation = transform.rotation;
+        }
         bm = GameObject.Find("Build Manager").GetComponent<BuildManager>();
         turret = bm.turret;
         wall = bm.wall;
@@ -39,22 +45,56 @@ public class BuildingLot : MonoBehaviour {
 
     public void buildTurret()
     {
-        Instantiate(turret, transform.position, transform.rotation);
+        building = Instantiate(turret, transform.position, transform.rotation) as GameObject;
     }
 
     public void buildWall()
     {
-        Instantiate(wall, transform.position, transform.rotation);
+        building = Instantiate(wall, transform.position, transform.rotation) as GameObject;
     }
 
     public void repair()
     {
+        if (building.GetComponent<Wall>() != null)
+        {
+            building.GetComponent<Wall>().repair();
+        }
+        else if (building.GetComponent<Turret>() != null)
+        {
+            //building.GetComponent<Turret>();
+        }
+    }
 
+    public int repairCosts()
+    {
+
+        return 0;
     }
 
     public void upgrade()
     {
+        if (building.GetComponent<Wall>() != null)
+        {
+            building.GetComponent<Wall>().upgrade();
+        }
+        else if (building.GetComponent<Turret>() != null)
+        {
+            //building.GetComponent<Turret>().Upgrade();
+        }
+    }
 
+    public int upgradeCosts()
+    {
+        if (building.GetComponent<Wall>() != null)
+        {
+            return building.GetComponent<Wall>().upgradeCosts;
+        }
+        else if (building.GetComponent<Turret>() != null)
+        {
+            return building.GetComponent<Turret>().upgradecosts;
+        }
+
+        return 0;
     }
 
     public void closeGUI()

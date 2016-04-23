@@ -5,7 +5,7 @@ public class Wall : MonoBehaviour {
     int level = 1;
     int hp;
     public int maxHp = 200;
-    public int cost = 10;
+    public int costs = 10;
     public int upgradeCosts = 15;
 
 	// Use this for initialization

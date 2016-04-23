@@ -16,8 +16,8 @@ public class Turret : MonoBehaviour {
 
 	int hp = 100; 
 	int level = 1; 
-	int costs = 100; 
-	int upgradecosts = 50; 
+	public int costs = 100; 
+	public int upgradecosts = 50; 
 
 	private States myState; 
 

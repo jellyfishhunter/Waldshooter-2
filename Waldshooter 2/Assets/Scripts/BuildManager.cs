@@ -24,6 +24,14 @@ public class BuildManager : MonoBehaviour {
         }
     }
 
+    void ButtonActivation()
+    {
+        GameObject turretButton = GameObject.Find("Button Turret");
+        GameObject wallButton = GameObject.Find("Button Wall");
+        GameObject upgradeButton = GameObject.Find("Button Upgrade");
+        GameObject cancelButton = GameObject.Find("Button Cancel");
+    }
+
     public void OpenMenu(BuildingLot lot)
     {
         if (active == null)
@@ -44,25 +52,39 @@ public class BuildManager : MonoBehaviour {
 
     public void buildTurret()
     {
-        active.buildTurret();
+        if(active.building == null && player.Money >= turret.GetComponent<Turret>().costs)
+        {
+            active.buildTurret();
+            player.Money -= turret.GetComponent<Turret>().costs;
+        }
     }
 
     public void buildWall()
     {
-        Debug.Log("build wall");
-        active.buildWall();
-
+        if (active.building == null && player.Money >= wall.GetComponent<Wall>().costs)
+        {
+            active.buildWall();
+            player.Money -= wall.GetComponent<Wall>().costs;
+        }
     }
 
     // TODO
     public void Repair()
     {
-        active.repair();
+        if (active.building != null && player.Money >= active.repairCosts())
+        {
+            active.repair();
+            player.Money -= active.repairCosts();
+        }
     }
 
     public void Upgrade()
     {
-        active.upgrade();
+        if (active.building != null && player.Money >= active.upgradeCosts())
+        {
+            active.upgrade();
+            player.Money -= active.upgradeCosts();
+        }
     }
 
     public void Cancel()
