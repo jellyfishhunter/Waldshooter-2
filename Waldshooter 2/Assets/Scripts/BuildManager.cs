@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 //TODO Money n shit
 public class BuildManager : MonoBehaviour {
@@ -16,20 +17,36 @@ public class BuildManager : MonoBehaviour {
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
     }
 
-    void Update()
-    {
-        if (active != null)
-        {
-            //Cursor.visible = true;
-        }
-    }
-
     void ButtonActivation()
     {
         GameObject turretButton = GameObject.Find("Button Turret");
         GameObject wallButton = GameObject.Find("Button Wall");
         GameObject upgradeButton = GameObject.Find("Button Upgrade");
         GameObject cancelButton = GameObject.Find("Button Cancel");
+
+        if(active.building == null)
+        {
+           // turretButton.GetComponent<Button>().interactable = player.Money >= turret.GetComponent<Turret>().costs;
+            wallButton.GetComponent<Button>().interactable = player.Money >= wall.GetComponent<Wall>().costs;
+            upgradeButton.GetComponent<Button>().interactable = false;
+        }
+        else
+        {
+          //  turretButton.GetComponent<Button>().interactable = false;
+            wallButton.GetComponent<Button>().interactable = false;
+            upgradeButton.GetComponent<Button>().interactable = player.Money >= active.upgradeCosts();
+        }
+    }
+
+    void TextUpdate()
+    {
+        Text turretText = GameObject.Find("Text Turret").GetComponent<Text>();
+        Text wallText = GameObject.Find("Text Wall").GetComponent<Text>();
+        Text upgradeText = GameObject.Find("Text Upgrade").GetComponent<Text>();
+
+        //turretText.text = "" + turret.GetComponent<Turret>().costs;
+        wallText.text = "" + wall.GetComponent<Wall>().costs;
+        upgradeText.text = "" + active.upgradeCosts();
     }
 
     public void OpenMenu(BuildingLot lot)
@@ -38,6 +55,8 @@ public class BuildManager : MonoBehaviour {
         {
             buildMenu.SetActive(true);
             active = lot;
+            ButtonActivation();
+            TextUpdate();
         }
     }
 
@@ -57,6 +76,7 @@ public class BuildManager : MonoBehaviour {
             active.buildTurret();
             player.Money -= turret.GetComponent<Turret>().costs;
         }
+        Cancel();
     }
 
     public void buildWall()
@@ -66,6 +86,7 @@ public class BuildManager : MonoBehaviour {
             active.buildWall();
             player.Money -= wall.GetComponent<Wall>().costs;
         }
+        Cancel();
     }
 
     // TODO
@@ -76,6 +97,7 @@ public class BuildManager : MonoBehaviour {
             active.repair();
             player.Money -= active.repairCosts();
         }
+        Cancel();
     }
 
     public void Upgrade()
@@ -85,6 +107,7 @@ public class BuildManager : MonoBehaviour {
             active.upgrade();
             player.Money -= active.upgradeCosts();
         }
+        Cancel();
     }
 
     public void Cancel()
