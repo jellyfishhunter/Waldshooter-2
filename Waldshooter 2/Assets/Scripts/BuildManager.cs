@@ -20,7 +20,7 @@ public class BuildManager : MonoBehaviour {
     {
         if (active != null)
         {
-            Cursor.visible = true;
+            //Cursor.visible = true;
         }
     }
 
@@ -49,6 +49,7 @@ public class BuildManager : MonoBehaviour {
 
     public void buildWall()
     {
+        Debug.Log("build wall");
         active.buildWall();
 
     }
@@ -66,6 +67,8 @@ public class BuildManager : MonoBehaviour {
 
     public void Cancel()
     {
+        Debug.Log("build cancel");
+
         active.closeGUI();
         buildMenu.SetActive(false);
         active = null;
