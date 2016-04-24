@@ -8,6 +8,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Prototype Scenes/MainMenu.unity
   - enabled: 1
+    path: Assets/Prototype Scenes/levelbuilding_scene + navmesh.unity
+  - enabled: 1
     path: Assets/Prototype Scenes/Alex_2D.unity
   - enabled: 1
     path: Assets/Prototype Scenes/Malte_2D.unity
