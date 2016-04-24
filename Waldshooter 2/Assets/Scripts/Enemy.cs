@@ -199,7 +199,11 @@ public class Enemy : MonoBehaviour {
 
     public void hit(GameObject bullet)
     {
-        hp -= bullet.GetComponent<Bullet>().hitValue;
+        if(bullet.GetComponent<Bullet>() != null)
+            hp -= bullet.GetComponent<Bullet>().hitValue;
+        else
+            hp -= bullet.GetComponent<Bomb>().hitValue;
+
         if (hp <= 0)
         {
             die();
