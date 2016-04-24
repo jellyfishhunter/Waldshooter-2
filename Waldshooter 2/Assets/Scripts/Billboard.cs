@@ -10,6 +10,8 @@ public class Billboard : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		this.transform.rotation = Quaternion.identity; 
+		Quaternion tempRotaton = this.transform.rotation; 
+		tempRotaton.y = Camera.main.transform.rotation.y; 
+		this.transform.rotation = tempRotaton;
 	}
 }

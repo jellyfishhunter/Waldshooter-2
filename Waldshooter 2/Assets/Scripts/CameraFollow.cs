@@ -6,6 +6,7 @@ public class CameraFollow : MonoBehaviour
 
     private GameObject player;
     private float zDistance;
+	private float xDistance; 
 	public float targetSize = 10f;
 	public float runningSize = 10f;
 	public float shootingSize = 6f; 
@@ -15,6 +16,7 @@ public class CameraFollow : MonoBehaviour
     {
         player = GameObject.FindGameObjectWithTag("Player");
         zDistance = player.transform.position.z - this.transform.position.z;
+		xDistance = player.transform.position.x - this.transform.position.x; 
     }
 
     // Update is called once per frame
@@ -22,7 +24,7 @@ public class CameraFollow : MonoBehaviour
     {
 
         Vector3 myPos = this.transform.position;
-        myPos.x = player.transform.position.x;
+		myPos.x = player.transform.position.x - xDistance; 
         myPos.z = player.transform.position.z - zDistance;
 
 

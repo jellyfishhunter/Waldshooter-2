@@ -14,9 +14,12 @@ public class Player : MonoBehaviour
     private float move = 0f;
     public float tilt;
 
+
+	public GameObject bloodSystem; 
     public int Health;
     public int Money;
     public int Kills;
+	bool isDead = false; 
 
     Rigidbody PlayerRigidbody;
 
@@ -37,7 +40,7 @@ public class Player : MonoBehaviour
         myState = States.running;
         PlayerRigidbody = this.GetComponent<Rigidbody>();
 		playerAnimator = animationObject.GetComponent<Animator> ();
-		playerAnimator.SetBool ("isMoving", false); 
+
 
     }
 
@@ -104,7 +107,10 @@ public class Player : MonoBehaviour
        
 
 		Vector3 move = new Vector3(Input.GetAxis("Horizontal"), 0f, Input.GetAxis("Vertical"));
-		PlayerRigidbody.position += move.normalized * speed * Time.deltaTime;
+		if (move.sqrMagnitude > 0.9f) {
+			move = move.normalized; 
+		}
+		PlayerRigidbody.position += move * speed * Time.deltaTime;
 
 		//Play Animation depending on view-direction
 		if (Input.GetAxis ("Horizontal") > 0f) {
@@ -161,13 +167,23 @@ public class Player : MonoBehaviour
         Debug.Log("Player Hit");
 
         Health -= bullet.GetComponent<Bullet>().hitValue;
-        if (Health <= 0)
+		if (Health <= 0 && !isDead)
         {
+			GameObject myBloodSytem = (GameObject)Instantiate (bloodSystem, transform.position, Quaternion.identity);
+			Destroy (myBloodSytem, 1); 
+
+			isDead = true; 
             Debug.Log("Player Dead");
-            //die();
-            GameObject.Find("Game Manager").GetComponent<GameManager>().GameOver();
+			animationObject.SetActive (false); 
+			StartCoroutine (waitAfterDeath ()); 
+           
         }
     }
+
+	IEnumerator waitAfterDeath(){
+		yield return new WaitForSeconds (1); 
+		GameObject.Find("Game Manager").GetComponent<GameManager>().GameOver();
+	}
 
     public void collectLoot(Loot loot)
     {

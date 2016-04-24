@@ -13,12 +13,20 @@ public class Enemy : MonoBehaviour {
     public GameObject bullet;
     public float attackIntervall;
 
+
+	private Vector3 previousPosition;
+
     GameObject player;
     GameObject tree;
     Transform targetTransform;
     NavMeshAgent agent;
     float timeUntilnextShot = 0;
     float timeUntilStopChasingPlayer = 0;
+
+	public GameObject animationObject; 
+	Animator enemyAnimator; 
+
+	public GameObject bloodSystem; 
 
     GameObject GameManager;
 
@@ -31,6 +39,9 @@ public class Enemy : MonoBehaviour {
         behaviourState = States.attackTree;
         targetTransform = tree.transform;
         moveToTarget();
+
+
+		enemyAnimator = animationObject.GetComponent<Animator> ();
 	}
 
     void moveToTarget()
@@ -44,6 +55,22 @@ public class Enemy : MonoBehaviour {
 	void Update () {
         checkBehaviour();
         aimAndShoot();
+
+		//noch ordentlich einbauen? prüfen ob er sich bwergt und dann animation abspielen. 
+		if (transform.position.x < previousPosition.x) {
+			enemyAnimator.SetInteger ("movingState", 1); 
+			Vector3 posScale = new Vector3 (-1, 1, 1); 
+			animationObject.transform.localScale = posScale; 
+		} else if (transform.position.x > previousPosition.x) {
+			enemyAnimator.SetInteger ("movingState", 1); 
+			Vector3 posScale = new Vector3 (1, 1, 1); 
+			animationObject.transform.localScale = posScale; 
+		} else {
+			enemyAnimator.SetInteger ("movingState", 0); 
+		}
+		previousPosition = transform.position;
+			
+	
     }
 
     void checkBehaviour()
@@ -182,6 +209,9 @@ public class Enemy : MonoBehaviour {
     // TODO: enemy counter etc
     void die()
     {
+		GameObject myBloodSytem = (GameObject)Instantiate (bloodSystem, transform.position, Quaternion.identity);
+		Destroy (myBloodSytem, 1); 
+
         GameManager.GetComponent<GameManager>().livingEnemies--;
         player.GetComponent<Player>().Kills++;
         int lootCount = Random.Range(0, 5);

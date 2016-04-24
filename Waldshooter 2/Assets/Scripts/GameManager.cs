@@ -52,11 +52,11 @@ public class GameManager : MonoBehaviour {
           //  Debug.Log("bin in buildloop");
             //waveSize = 0;
             spawnedEnemies = 0;
-			Cursor.visible = true;
 
 			if (!loopTimerActive) {
 				StartCoroutine (LoopTimer (buildLooptime, myState, States.fightloop)); 
 				loopTimerActive = true;
+				GameObject.Find ("Player").GetComponent<Player> ().Health = 100; 
             }
         }
 
