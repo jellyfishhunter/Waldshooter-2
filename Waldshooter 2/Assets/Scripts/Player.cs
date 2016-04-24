@@ -24,6 +24,9 @@ public class Player : MonoBehaviour
     private float nextFire;
 
     public GameObject PlayerBullet;
+	public GameObject animationObject; 
+	Animator playerAnimator; 
+
     public float distance = 10.0f;
 
     public Transform bulletSpawn;
@@ -33,6 +36,9 @@ public class Player : MonoBehaviour
 
         myState = States.running;
         PlayerRigidbody = this.GetComponent<Rigidbody>();
+		playerAnimator = animationObject.GetComponent<Animator> ();
+		playerAnimator.SetBool ("isMoving", false); 
+
     }
 
     void LookAtMouse()
@@ -94,8 +100,26 @@ public class Player : MonoBehaviour
 
     void Move()
     {
-        var move = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-        PlayerRigidbody.position += move * speed * Time.deltaTime;
+       // var move = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+       
+
+		Vector3 move = new Vector3(Input.GetAxis("Horizontal"), 0f, Input.GetAxis("Vertical"));
+		PlayerRigidbody.position += move.normalized * speed * Time.deltaTime;
+
+		//Play Animation depending on view-direction
+		if (Input.GetAxis ("Horizontal") > 0f) {
+			playerAnimator.SetInteger ("movingState", 1); 
+			Vector3 posScale = new Vector3 (1, 1, 1); 
+			animationObject.transform.localScale = posScale; 
+		} else if (Input.GetAxis ("Horizontal") < 0f) {
+			playerAnimator.SetInteger ("movingState", 1); 
+			Vector3 posScale = new Vector3 (-1, 1, 1); 
+			animationObject.transform.localScale = posScale; 
+		} else if (Input.GetAxis ("Vertical") != 0f) {
+			playerAnimator.SetInteger ("movingState", -1); 
+		} else {
+			playerAnimator.SetInteger ("movingState", 0); 
+		}
         //Debug.Log("Horizontal: " + Input.GetAxis("Horizontal").ToString());
         //Debug.Log("Vertical: " + Input.GetAxis("Vertical").ToString());
         //transform.rotation = Quaternion.LookRotation(move);

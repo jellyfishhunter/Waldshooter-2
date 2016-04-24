@@ -30,6 +30,7 @@ public class GameManager : MonoBehaviour {
     int spawnedEnemies = 0;
 
     public GameObject GameOverMenu;
+	public GameObject animationObject; 
 
 	void Start () {
 		myState = States.buildloop;
