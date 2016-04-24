@@ -101,17 +101,8 @@ public class Player : MonoBehaviour
         Move();
     }
 
-    void Move()
-    {
-       // var move = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-       
 
-		Vector3 move = new Vector3(Input.GetAxis("Horizontal"), 0f, Input.GetAxis("Vertical"));
-		if (move.sqrMagnitude > 0.9f) {
-			move = move.normalized; 
-		}
-		PlayerRigidbody.position += move * speed * Time.deltaTime;
-
+	void PlayAnimations(){
 		//Play Animation depending on view-direction
 		if (Input.GetAxis ("Horizontal") > 0f) {
 			playerAnimator.SetInteger ("movingState", 1); 
@@ -126,6 +117,22 @@ public class Player : MonoBehaviour
 		} else {
 			playerAnimator.SetInteger ("movingState", 0); 
 		}
+
+	}
+
+    void Move()
+    {
+       // var move = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+       
+
+		Vector3 move = new Vector3(Input.GetAxis("Horizontal"), 0f, Input.GetAxis("Vertical"));
+		if (move.sqrMagnitude > 0.9f) {
+			move = move.normalized; 
+		}
+		PlayerRigidbody.position += move * speed * Time.deltaTime;
+
+		PlayAnimations (); 
+
         //Debug.Log("Horizontal: " + Input.GetAxis("Horizontal").ToString());
         //Debug.Log("Vertical: " + Input.GetAxis("Vertical").ToString());
         //transform.rotation = Quaternion.LookRotation(move);

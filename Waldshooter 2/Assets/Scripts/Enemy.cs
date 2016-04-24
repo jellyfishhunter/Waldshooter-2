@@ -210,7 +210,7 @@ public class Enemy : MonoBehaviour {
     void die()
     {
 		GameObject myBloodSytem = (GameObject)Instantiate (bloodSystem, transform.position, Quaternion.identity);
-		Destroy (myBloodSytem, 1); 
+		Destroy (myBloodSytem, 2); 
 
         GameManager.GetComponent<GameManager>().livingEnemies--;
         player.GetComponent<Player>().Kills++;
