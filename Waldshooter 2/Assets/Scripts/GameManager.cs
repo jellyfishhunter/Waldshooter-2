@@ -25,7 +25,7 @@ public class GameManager : MonoBehaviour {
 
 	bool isSpawningEnemys = false; 
 	bool loopTimerActive = false; 
-	int waveSize = 10;
+	public int waveSize = 10;
     public int livingEnemies;
     int spawnedEnemies = 0;
 
@@ -57,6 +57,7 @@ public class GameManager : MonoBehaviour {
 				StartCoroutine (LoopTimer (buildLooptime, myState, States.fightloop)); 
 				loopTimerActive = true;
 				GameObject.Find ("Player").GetComponent<Player> ().Health = 100; 
+				waveSize += 2; 
             }
         }
 
@@ -66,7 +67,7 @@ public class GameManager : MonoBehaviour {
 
 
 			if(!isSpawningEnemys && spawnedEnemies < waveSize) {
-				StartCoroutine(SpawnEnemys (enemys[0], enemySpawnPoints[0], 0.01f));
+				StartCoroutine(SpawnEnemys (enemys[0], enemySpawnPoints[Random.Range(0,enemySpawnPoints.Count)], 0.01f));
                 //Debug.Log("livingEnemies: " + livingEnemies.ToString());
                 isSpawningEnemys = true; 
 				//waveSize++; 
