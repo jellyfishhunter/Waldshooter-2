@@ -26,13 +26,13 @@ public class BuildManager : MonoBehaviour {
 
         if(active.building == null)
         {
-           // turretButton.GetComponent<Button>().interactable = player.Money >= turret.GetComponent<Turret>().costs;
+            turretButton.GetComponent<Button>().interactable = player.Money >= turret.GetComponent<Turret>().costs;
             wallButton.GetComponent<Button>().interactable = player.Money >= wall.GetComponent<Wall>().costs;
             upgradeButton.GetComponent<Button>().interactable = false;
         }
         else
         {
-          //  turretButton.GetComponent<Button>().interactable = false;
+            turretButton.GetComponent<Button>().interactable = false;
             wallButton.GetComponent<Button>().interactable = false;
             upgradeButton.GetComponent<Button>().interactable = player.Money >= active.upgradeCosts();
         }
@@ -44,7 +44,7 @@ public class BuildManager : MonoBehaviour {
         Text wallText = GameObject.Find("Text Wall").GetComponent<Text>();
         Text upgradeText = GameObject.Find("Text Upgrade").GetComponent<Text>();
 
-        //turretText.text = "" + turret.GetComponent<Turret>().costs;
+        turretText.text = "" + turret.GetComponent<Turret>().costs;
         wallText.text = "" + wall.GetComponent<Wall>().costs;
         upgradeText.text = "" + active.upgradeCosts();
     }
@@ -89,7 +89,7 @@ public class BuildManager : MonoBehaviour {
         Cancel();
     }
 
-    // TODO
+    // TODO?
     public void Repair()
     {
         if (active.building != null && player.Money >= active.repairCosts())

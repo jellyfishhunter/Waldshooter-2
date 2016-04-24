@@ -6,7 +6,7 @@ public class Wall : MonoBehaviour {
     int hp;
     public int maxHp = 200;
     public int costs = 10;
-    public int upgradeCosts = 15;
+    public int upgradeCosts = 8;
 
 	// Use this for initialization
 	void Start () {
@@ -25,7 +25,10 @@ public class Wall : MonoBehaviour {
 
     public void upgrade()
     {
-
+        level++;
+        maxHp = (int)(maxHp * 2f);
+        hp = maxHp;
+        upgradeCosts = (int)(upgradeCosts * 1.5f);
     }
 
     public void hit(GameObject bullet)

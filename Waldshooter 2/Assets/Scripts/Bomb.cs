@@ -22,6 +22,13 @@ public class Bomb : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        if (timeToLive <= 0)
+        {
+            GameObject explosion = (GameObject)Instantiate(particleSystem, transform.position, Quaternion.identity);
+            Destroy(explosion, 1);
+            Destroy(gameObject);
+        }
+        timeToLive -= Time.deltaTime;
     }
 
 

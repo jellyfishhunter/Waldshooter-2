@@ -14,10 +14,11 @@ public class Turret : MonoBehaviour {
 	float attackIntervall = 0.5f; 
 	float range = 20f; 
 
-	int hp = 100; 
+	int hp;
+    public int maxHp = 100;
 	int level = 1; 
-	public int costs = 100; 
-	public int upgradecosts = 50; 
+	public int costs = 20; 
+	public int upgradecosts = 15; 
 
 	private States myState;
 
@@ -34,7 +35,7 @@ public class Turret : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		myTransform = transform;
-
+        hp = maxHp;
     }
 
     // Update is called once per frame
@@ -132,5 +133,20 @@ public class Turret : MonoBehaviour {
 	{
 		Destroy(gameObject);
 	}
+
+    public void repair()
+    {
+
+    }
+
+    public void upgrade()
+    {
+        level++;
+        maxHp = (int)(maxHp * 1.5f);
+        hp = maxHp;
+        upgradecosts = (int)(upgradecosts * 1.5f);
+        attackIntervall *= 0.8f;
+        range *= 1.2f;
+    }
 
 }

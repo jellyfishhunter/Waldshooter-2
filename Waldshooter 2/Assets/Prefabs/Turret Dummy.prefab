@@ -133,8 +133,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemysInTrigger: []
-  costs: 100
-  upgradecosts: 50
+  maxHp: 100
+  costs: 20
+  upgradecosts: 15
   bombSpawn: {fileID: 447748}
   Target: {fileID: 0}
   firingAngle: 45

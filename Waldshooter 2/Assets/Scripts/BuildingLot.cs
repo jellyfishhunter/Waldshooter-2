@@ -79,7 +79,7 @@ public class BuildingLot : MonoBehaviour {
         }
         else if (building.GetComponent<Turret>() != null)
         {
-            //building.GetComponent<Turret>().Upgrade();
+            building.GetComponent<Turret>().upgrade();
         }
     }
 
