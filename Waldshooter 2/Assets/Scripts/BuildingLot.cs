@@ -67,7 +67,14 @@ public class BuildingLot : MonoBehaviour {
 
     public int repairCosts()
     {
-
+        if (building.GetComponent<Wall>() != null)
+        {
+            return building.GetComponent<Wall>().repaircosts;
+        }
+        else if (building.GetComponent<Turret>() != null)
+        {
+            return building.GetComponent<Turret>().repaircosts;
+        }
         return 0;
     }
 

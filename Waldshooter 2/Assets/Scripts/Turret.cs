@@ -17,7 +17,8 @@ public class Turret : MonoBehaviour {
     public int maxHp = 100;
 	int level = 1; 
 	public int costs = 20; 
-	public int upgradecosts = 15; 
+	public int upgradecosts = 15;
+    public int repaircosts = 0;
 
     public Transform bombSpawn;
 	public Transform Target;
@@ -31,6 +32,7 @@ public class Turret : MonoBehaviour {
 	void Start () {
 		myTransform = transform;
         hp = maxHp;
+        repaircosts = costs / 2;
     }
 
     // Update is called once per frame
@@ -131,7 +133,7 @@ public class Turret : MonoBehaviour {
 
     public void repair()
     {
-
+        hp = maxHp;
     }
 
     public void upgrade()
@@ -140,6 +142,7 @@ public class Turret : MonoBehaviour {
         maxHp = (int)(maxHp * 1.5f);
         hp = maxHp;
         upgradecosts = (int)(upgradecosts * 1.5f);
+        repaircosts = (int)(repaircosts * 1.5f);
         attackIntervall *= 0.8f;
         range *= 1.2f;
     }
