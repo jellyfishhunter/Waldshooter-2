@@ -8,7 +8,6 @@ public class Turret : MonoBehaviour {
 	public List<Transform> enemysInTrigger;  
 
 	private Transform targetTransform; 
-	private enum States { attackEnemy, onHold};
 
 	float timeUntilnextShot = 0f; 
 	float attackIntervall = 0.5f; 
@@ -20,12 +19,8 @@ public class Turret : MonoBehaviour {
 	public int costs = 20; 
 	public int upgradecosts = 15; 
 
-	private States myState;
-
     public Transform bombSpawn;
 	public Transform Target;
-	public float firingAngle = 45.0f;
-	public float gravity = 9.8f;
 
 	public GameObject Projectile;      
 	private Transform myTransform;
